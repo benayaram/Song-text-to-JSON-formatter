@@ -83,7 +83,8 @@
         <h1>Song Formation</h1>
         <div class="card">
             <div class="form-container">
-                <input type="text" id="songTitle" placeholder="Song Title" required>
+                <input type="text" id="teluguTitle" placeholder="Telugu Title" required>
+                <input type="text" id="englishTitle" placeholder="English Title" required>
                 <input type="text" id="lyricist" placeholder="Lyricist">
                 <textarea id="teluguLyrics" placeholder="Telugu Lyrics" required></textarea>
                 <textarea id="englishLyrics" placeholder="English Lyrics" required></textarea>
@@ -102,7 +103,8 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const songTitleInput = document.getElementById('songTitle');
+            const teluguTitleInput = document.getElementById('teluguTitle');
+            const englishTitleInput = document.getElementById('englishTitle');
             const lyricistInput = document.getElementById('lyricist');
             const teluguLyricsInput = document.getElementById('teluguLyrics');
             const englishLyricsInput = document.getElementById('englishLyrics');
@@ -115,15 +117,23 @@
             let songs = [];
 
             submitBtn.addEventListener('click', () => {
-                const newSong = {
-                    song_title: songTitleInput.value,
+                const teluguSong = {
+                    song_title: teluguTitleInput.value,
                     lyricist: lyricistInput.value,
                     telugu_lyrics: teluguLyricsInput.value,
                     english_lyrics: englishLyricsInput.value,
                     audio_url: audioUrlInput.value
                 };
 
-                songs.push(newSong);
+                const englishSong = {
+                    song_title: englishTitleInput.value,
+                    lyricist: lyricistInput.value,
+                    telugu_lyrics: teluguLyricsInput.value,
+                    english_lyrics: englishLyricsInput.value,
+                    audio_url: audioUrlInput.value
+                };
+
+                songs.push(teluguSong, englishSong);
                 updateJsonOutput();
                 clearForm();
             });
@@ -144,7 +154,8 @@
             }
 
             function clearForm() {
-                songTitleInput.value = '';
+                teluguTitleInput.value = '';
+                englishTitleInput.value = '';
                 lyricistInput.value = '';
                 teluguLyricsInput.value = '';
                 englishLyricsInput.value = '';
@@ -153,5 +164,4 @@
         });
     </script>
 </body>
-                  </html>
-                  
+</html>
