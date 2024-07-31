@@ -98,6 +98,7 @@
                 <h2>JSON Preview</h2>
                 <pre id="jsonOutput">{}</pre>
                 <button id="copyBtn">Copy JSON</button>
+                <button id="shareBtn">Share to Admin</button>
             </div>
         </div>
     </div>
@@ -112,6 +113,7 @@
             const submitBtn = document.getElementById('submitBtn');
             const clearBtn = document.getElementById('clearBtn');
             const copyBtn = document.getElementById('copyBtn');
+            const shareBtn = document.getElementById('shareBtn');
             const jsonOutput = document.getElementById('jsonOutput');
 
             let songs = [];
@@ -133,7 +135,8 @@
                     audio_url: audioUrlInput.value
                 };
 
-                songs.push(teluguSong, englishSong);
+                songs.unshift(teluguSong); // Add Telugu song at the top
+                songs.push(englishSong); // Add English song at the bottom
                 updateJsonOutput();
                 clearForm();
             });
@@ -147,6 +150,13 @@
                 navigator.clipboard.writeText(JSON.stringify(songs, null, 2))
                     .then(() => alert('JSON copied to clipboard!'))
                     .catch(err => console.error('Error copying JSON:', err));
+            });
+
+            shareBtn.addEventListener('click', () => {
+                const jsonText = JSON.stringify(songs, null, 2);
+                const phoneNumber = '+917780549645';
+                const whatsappUrl = `https://api.whatsapp.com/send?phone=${encodeURIComponent(phoneNumber)}&text=${encodeURIComponent(jsonText)}`;
+                window.open(whatsappUrl, '_blank');
             });
 
             function updateJsonOutput() {
